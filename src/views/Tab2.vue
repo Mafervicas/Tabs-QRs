@@ -11,18 +11,60 @@
           <ion-title size="large">Tab 2</ion-title>
         </ion-toolbar>
       </ion-header>
-      
-      <ExploreContainer name="Tab 2 page" />
+        
+
+      <div class="Scan">
+        <StreamBarcodeReader
+    @decode="onDecode"
+    @loaded="onLoaded">
+    </StreamBarcodeReader> 
+
+<ImageBarcodeReader
+    @decode="onDecode"
+    @error="onError"
+></ImageBarcodeReader>
+
+</div>
+
+
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import { StreamBarcodeReader } from "vue-barcode-reader";
+import { ImageBarcodeReader } from "vue-barcode-reader";
+
 
 export default  {
   name: 'Tab2',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { 
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonContent, 
+    IonPage,
+    StreamBarcodeReader,
+     ImageBarcodeReader },
+    methods: {
+  onDecode (result) {
+    console.log(result)
+  },
+  onLoaded (result){
+console.log(result)
+  },
+  onError(result){
+console.log(result)
+  }
 }
+}
+
 </script>
+
+.Scan{
+  padding-top: 70px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
